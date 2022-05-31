@@ -20,13 +20,17 @@ class UserModel {
   final String id;
   final String account;
   final String password;
-  final String userName;
+  String? userName;
+  String? dateOfBirth;
+  List<String>? addresses;
 
   UserModel({
     required this.id,
     required this.account,
     required this.password,
-    required this.userName,
+    this.userName,
+    this.dateOfBirth,
+    this.addresses,
   });
 
   Map<String, dynamic> toJson() {
@@ -34,6 +38,8 @@ class UserModel {
       'id': id,
       'account': account,
       'userName': userName,
+      'dateOfBirth': dateOfBirth,
+      'addresses': addresses,
     };
   }
 }
