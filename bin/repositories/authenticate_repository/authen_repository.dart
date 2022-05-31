@@ -1,3 +1,5 @@
+import 'package:shelf/shelf.dart';
+
 import '../../custom_response.dart';
 import '../../services/authenticate_service/authen_service.dart';
 
@@ -6,7 +8,7 @@ class AuthenRepository implements ILoginService {
   AuthenRepository();
 
   @override
-  Future<CustomResponse> onLogin({required String account, required String password}) async {
+  Future<Response> onLogin({required String account, required String password}) async {
     if (account == 'kieuphong' && password == '123123') {
       return CustomResponse<Map<String, dynamic>>(
         statusCode: 200,
