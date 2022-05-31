@@ -7,8 +7,8 @@ import '../../repositories/repositories.dart';
 import '../../routers/routers.dart';
 import '../../services/services.dart';
 
-class AuthenHandler extends CustomHandler {
-  final LoginService _loginService = LoginService(AuthenRepository());
+class RegisterHandler extends CustomHandler {
+  final IRegisterService _registerService = RegisterService(AuthenRepository());
 
   @override
   Future<Response> delete(Request req) {
@@ -25,7 +25,7 @@ class AuthenHandler extends CustomHandler {
   @override
   Future<Response> post(Request req) async {
     Map<String, dynamic> body = jsonDecode(await req.readAsString());
-    return _loginService.onLogin(account: body['account'], password: body['password']);
+    return _registerService.onRegister(account: body['account'], password: body['password']);
   }
 
   @override
@@ -36,6 +36,6 @@ class AuthenHandler extends CustomHandler {
 
   @override
   void registerToRouter() {
-    RouterCenter.router.post(RouterName.login, post);
+    RouterCenter.router.post(RouterName.register, post);
   }
 }
