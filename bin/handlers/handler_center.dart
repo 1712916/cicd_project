@@ -7,5 +7,6 @@ class HandlerCenter {
     LoginHandler().registerToRouter();
     RegisterHandler().registerToRouter();
     UserProfileHandler().registerToRouter();
+    TokenHandler().registerToRouter();
   }
 }

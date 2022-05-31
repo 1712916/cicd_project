@@ -1,3 +1,4 @@
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dbcrypt/dbcrypt.dart';
 import 'package:shelf/shelf.dart';
 
@@ -14,10 +15,22 @@ class AuthenRepository implements ILoginService, IRegisterService {
     try {
       final user = UserMockData.users.firstWhere((element) => element.account == account);
       if (DBCrypt().checkpw(password, user.password)) {
+        //gen token
+        final jwt = JWT(
+          {
+            'id': user.id,
+          },
+        );
+        String secretKey = 'kieuPhong';
+        String token = jwt.sign(SecretKey(secretKey), expiresIn: Duration(seconds: 30));
+
         return CustomResponse<Map<String, dynamic>>(
           statusCode: 200,
           message: 'Đăng nhập thành công',
-          data: user.toJson(),
+          data: {
+            'userInfo': user.toJson(),
+            'token': token,
+          },
         );
       }
       print('Sai mật khẩu');
