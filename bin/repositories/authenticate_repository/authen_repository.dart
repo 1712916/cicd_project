@@ -4,6 +4,7 @@ import 'package:shelf/shelf.dart';
 
 import '../../custom_response.dart';
 import '../../data/mock_data/mock_data.dart';
+import '../../server.dart';
 import '../../services/authenticate_service/authen_service.dart';
 
 class AuthenRepository implements ILoginService, IRegisterService {
@@ -21,9 +22,7 @@ class AuthenRepository implements ILoginService, IRegisterService {
             'id': user.id,
           },
         );
-        String secretKey = 'kieuPhong';
-        String token = jwt.sign(SecretKey(secretKey), expiresIn: Duration(seconds: 30));
-
+        String token = jwt.sign(SecretKey(secretKey), expiresIn: Duration(minutes: 30));
         return CustomResponse<Map<String, dynamic>>(
           statusCode: 200,
           message: 'Đăng nhập thành công',

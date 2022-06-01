@@ -3,13 +3,17 @@ import 'dart:io';
 import 'package:dbcrypt/dbcrypt.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
+import 'package:shelf_router/shelf_router.dart';
 
+import 'data/mock_data/mock_data.dart';
 import 'handlers/handler_center.dart';
 import 'routers/router_center.dart';
 
 const _hostname = 'localhost';
+String secretKey = 'kieuPhong';
 
 void main(List<String> args) async {
+  UserMockData.initData();
   // Configure routes.
   final _router = RouterCenter.router;
   HandlerCenter.registerToRouter();

@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/src/request.dart';
-
-import 'package:shelf/src/response.dart';
-
 import '../../custom_handler.dart';
 import '../../routers/routers.dart';
 
@@ -29,12 +26,9 @@ class TokenHandler extends CustomHandler {
     try {
       // Verify a token
       final jwt = JWT.verify(token, SecretKey('kieuPhong'));
-
-      print('Payload: ${jwt.payload}');
       return Response.ok('token chưa hết hạn và payload: ${jwt.payload}');
-    }   catch (e) {
+    } catch (e) {
       return Response.ok('exception type: ${e.runtimeType}');
-
     }
   }
 

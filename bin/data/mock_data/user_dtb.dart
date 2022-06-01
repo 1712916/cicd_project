@@ -1,3 +1,5 @@
+import '../../repositories/repositories.dart';
+
 class UserMockData {
   static int _id = 0;
 
@@ -13,6 +15,13 @@ class UserMockData {
       userName: userName ?? '',
     ));
     return true;
+  }
+
+  static initData() {
+    AuthenRepository authenRepository = AuthenRepository();
+    for (int i = 0; i < 10; i++) {
+      authenRepository.onRegister(account: i.toString(), password: '123123');
+    }
   }
 }
 
