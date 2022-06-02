@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dbcrypt/dbcrypt.dart';
+import 'package:postgres/postgres.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -11,9 +12,19 @@ import 'routers/router_center.dart';
 
 const _hostname = 'localhost';
 String secretKey = 'kieuPhong';
-
+late PostgreSQLConnection connection;
 void main(List<String> args) async {
-  UserMockData.initData();
+
+  connection = PostgreSQLConnection(
+    "john.db.elephantsql.com",
+    5432,
+    "ecsdzzeq",
+    username: "ecsdzzeq",
+    password: "cnbS_dQMOjQJX4eG9Yzc1PT5mhvFrGAR",
+
+  );
+  await connection.open();
+  print('LOl: ${connection.databaseName}');
   // Configure routes.
   final _router = RouterCenter.router;
   HandlerCenter.registerToRouter();

@@ -1,6 +1,7 @@
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dbcrypt/dbcrypt.dart';
 import 'package:shelf/shelf.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../custom_response.dart';
 import '../../data/mock_data/mock_data.dart';
@@ -44,6 +45,12 @@ class AuthenRepository implements ILoginService, IRegisterService {
 
   @override
   Future<Response> onRegister({required String account, required String password}) async {
+    // await connection.execute('INSERT INTO user (id) VALUES ($account)');
+    // final outValue = await connection.transaction((ctx) async {
+    //   return await ctx.query('SELECT * FROM t WHERE id = @id LIMIT 1',
+    //       substitutionValues: {'id': 1});
+    // }) as List;
+
     try {
       final user = UserMockData.users.firstWhere((element) => element.account == account);
       return CustomResponse(
@@ -51,18 +58,32 @@ class AuthenRepository implements ILoginService, IRegisterService {
         message: 'Không thể đăng ký tài khoản này',
       );
     } catch (e) {
+      String id = Uuid().v4();
+      print('id: $id');
       String hashedPassword = DBCrypt().hashpw(password, DBCrypt().gensalt());
-      final isSuccess = UserMockData.addUser(account: account, password: hashedPassword);
-      if (isSuccess) {
-        return CustomResponse(
-          statusCode: 201,
-          message: 'Đăng ký thành công',
-        );
-      }
+      await connection.execute('INSERT INTO public.user (account, password) VALUES (@account, @password)', substitutionValues: {
+        'account': account,
+        'password': hashedPassword,
+      });
       return CustomResponse(
-        statusCode: 500,
-        message: 'Đã xuất hiện lỗi tại server',
+        statusCode: 201,
+        message: 'Đăng ký thành công',
       );
+      // try {
+      //   String id = Uuid().v4();
+      //   String hashedPassword = DBCrypt().hashpw(password, DBCrypt().gensalt());
+      //   await connection.execute('INSERT INTO user (id, account, password) VALUES ($id,$account,$hashedPassword)');
+      //   return CustomResponse(
+      //     statusCode: 201,
+      //     message: 'Đăng ký thành công',
+      //   );
+      // } catch (e, stackTrace) {
+      //   print('lỗi ${stackTrace}');
+      //   return CustomResponse(
+      //     statusCode: 500,
+      //     message: 'Đã xuất hiện lỗi tại server',
+      //   );
+      // }
     }
   }
 }
