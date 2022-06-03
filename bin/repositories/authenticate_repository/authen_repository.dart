@@ -1,7 +1,6 @@
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dbcrypt/dbcrypt.dart';
 import 'package:shelf/shelf.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../custom_response.dart';
 import '../../data/mock_data/mock_data.dart';
@@ -58,8 +57,6 @@ class AuthenRepository implements ILoginService, IRegisterService {
         message: 'Không thể đăng ký tài khoản này',
       );
     } catch (e) {
-      String id = Uuid().v4();
-      print('id: $id');
       String hashedPassword = DBCrypt().hashpw(password, DBCrypt().gensalt());
       await connection.execute('INSERT INTO public.user (account, password) VALUES (@account, @password)', substitutionValues: {
         'account': account,
