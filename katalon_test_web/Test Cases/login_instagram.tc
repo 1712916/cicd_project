@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>login_instagram</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>32080e6a-bc29-43e7-8add-9e61972ffda1</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>6281d193-649f-4ae3-87ea-7c6d5aade01c</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>b47e20c3-fe70-413b-ba8b-558388e8cfe6</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'smile.boss\t'</defaultValue>
+      <description></description>
+      <id>6281d193-649f-4ae3-87ea-7c6d5aade01c</id>
+      <masked>false</masked>
+      <name>account</name>
+   </variable>
+   <variable>
+      <defaultValue>'123123'</defaultValue>
+      <description></description>
+      <id>b47e20c3-fe70-413b-ba8b-558388e8cfe6</id>
+      <masked>false</masked>
+      <name>password</name>
+   </variable>
+</TestCaseEntity>
