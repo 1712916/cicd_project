@@ -16,15 +16,17 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-
+    defaults:
+      run:
+        working-directory: ./katalon_test_web
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+          
       - name: Katalon Studio Github Action
+       
         uses: katalon-studio/katalon-studio-github-action@v2
         with:
             version: '8.5.3'
-            working-directory: ./katalon_test_web
             args: '-noSplash  -retry=0 -testSuitePath="Test Suites/Instagram Login Test Suite" -browserType="Chrome" -executionProfile="default" --config -proxy.auth.option=NO_PROXY -proxy.system.option=NO_PROXY -proxy.system.applyToDesiredCapabilities=true'
