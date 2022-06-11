@@ -28,5 +28,5 @@ jobs:
        
         uses: katalon-studio/katalon-studio-github-action@v2
         with:
-            version: '8.5.3'
+            version: '8.2.5'
             args: '-noSplash  -retry=0 -testSuitePath="Test Suites/Instagram Login Test Suite" -browserType="Chrome" -executionProfile="default" --config -proxy.auth.option=NO_PROXY -proxy.system.option=NO_PROXY -proxy.system.applyToDesiredCapabilities=true'
